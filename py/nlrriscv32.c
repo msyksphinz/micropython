@@ -30,7 +30,7 @@
 
 #undef nlr_push
 
-__attribute__((naked)) unsigned int nlr_push(nlr_buf_t *nlr) {
+unsigned int nlr_push(nlr_buf_t *nlr) {
 
   __asm volatile (
       "sw  x2,  8 (x10) \n" // save regs...

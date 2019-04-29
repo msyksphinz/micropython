@@ -9,7 +9,7 @@ QSTR_DEFS = qstrdefsport.h
 include $(TOP)/py/py.mk
 
 ifeq ($(CROSS), 1)
-CROSS_COMPILE = arm-none-eabi-
+CROSS_COMPILE = riscv32-unknown-elf-
 endif
 
 INC += -I.
@@ -19,7 +19,8 @@ INC += -I$(BUILD)
 ifeq ($(CROSS), 1)
 DFU = $(TOP)/tools/dfu.py
 PYDFU = $(TOP)/tools/pydfu.py
-CFLAGS_CORTEX_M4 = -mthumb -mtune=cortex-m4 -mabi=aapcs-linux -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -fsingle-precision-constant -Wdouble-promotion
+# CFLAGS_CORTEX_M4 = -mthumb -mtune=cortex-m4 -mabi=aapcs-linux -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -fsingle-precision-constant -Wdouble-promotion
+CFLAGS_RISCV32 = -mfloat-abi=hard -fsingle-precision-constant -Wdouble-promotion
 CFLAGS = $(INC) -Wall -Werror -std=c99 -nostdlib $(CFLAGS_CORTEX_M4) $(COPT)
 LDFLAGS = -nostdlib -T stm32f405.ld -Map=$@.map --cref --gc-sections
 else
